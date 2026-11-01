@@ -1,0 +1,19 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: "http://0.0.0.0:${Api__InternalPort:?Set Api__InternalPort in .env}"
+      Scan__DelayMilliseconds: "${Scan__DelayMilliseconds:?Set Scan__DelayMilliseconds in .env}"
+      Logging__Directory: "${Logging__ContainerDirectory:?Set Logging__ContainerDirectory in .env}"
+    ports:
+      - target: ${Api__InternalPort:?Set Api__InternalPort in .env}
+        published: "${Api__Port:?Set Api__Port in .env}"
+        host_ip: "${Api__Host:?Set Api__Host in .env}"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: "${Logging__Directory:?Set Logging__Directory in .env}"
+        target: "${Logging__ContainerDirectory:?Set Logging__ContainerDirectory in .env}"

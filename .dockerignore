@@ -1,0 +1,15 @@
+.git
+.env
+.env.*
+.codex
+.agents
+**/bin
+**/obj
+**/logs
+**/log
+**/*.log
+**/*.docx
+**/*.user
+**/*.suo
+tests
+.DS_Store
